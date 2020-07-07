@@ -48,9 +48,13 @@ class MicropostsController extends Controller
         //認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
         if(\Auth::id() === $micropost->user_id){
             $micropost->delete();
+            
+             return view('micropost_favorite.favorite_button',[
+            'micropost'=>$micropost,
+            ]);
         }
                
         //前のURLへリダイレクトさせる
         return back();
     }    
-}    
+}   
